@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Case Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Case Details for Case Number: {{ case_number }}</h2>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% else %}
+        <div class="card">
+            <div class="card-body">
+                <p><strong>Parties:</strong> {{ data.parties }}</p>
+                <p><strong>Next Hearing Date:</strong> {{ data.next_hearing_date }}</p>
+                <p><strong>Status Summary:</strong> {{ data.case_status_summary }}</p>
+
+                {% if data.pdf_link %}
+                    <p><strong>Latest Judgment:</strong>
+                        <a href="{{ data.pdf_link }}" target="_blank" class="btn btn-sm btn-outline-primary">Download PDF</a>
+                    </p>
+                {% else %}
+                    <p><strong>Judgment PDF:</strong> Not available</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    <a href="/" class="btn btn-secondary mt-3">Search Another Case</a>
+</div>
+</body>
+</html>
